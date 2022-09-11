@@ -26,8 +26,62 @@ zsh apache-tomcat-9.0.65/bin/startup.sh
 zsh apache-tomcat-9.0.65/bin/shutdown.sh
 ```
 
-## 创建 Maven 项目
+## 准备工作
+
+### 创建 Maven Webapp 项目
+
+这里需要注意，在创建 Maven 项目时使用了新的模板： maven-archetype-webapp 。
 
 ```sh
-mvn archetype:generate -DgroupId=com.xunmao.demo -DartifactId=spring-mvc -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.xunmao.demo -DartifactId=spring-mvc -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.4 -DinteractiveMode=false
+```
+
+### 导入依赖
+
+```xml
+<!-- Spring MVC -->
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-webmvc</artifactId>
+  <version>5.3.22</version>
+</dependency>
+<!-- Servlet -->
+<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+<dependency>
+  <groupId>javax.servlet</groupId>
+  <artifactId>javax.servlet-api</artifactId>
+  <version>4.0.1</version>
+  <scope>provided</scope>
+</dependency>
+<!-- JSP -->
+<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+<dependency>
+  <groupId>javax.servlet.jsp</groupId>
+  <artifactId>javax.servlet.jsp-api</artifactId>
+  <version>2.3.3</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+## 将应用部署到 Tomcat
+
+### 通过 Maven 打包应用
+
+运行 Maven 生命周期中的 package 周期，获得 war 包。
+
+### 部署到 Tomcat
+
+将 war 包拷贝至 Tomcat 的指定文件夹：
+```
+{tomcat-installation-directory}/webapps
+```
+
+Tomcat 启动时，会将 war 自动展开为同名的文件夹（包含了 jsp ， class 文件）
+
+### 访问应用
+
+访问以下 URL 就可以看到 spring-mvc 项目的首页了。
+```
+localhost:8080/spring-mvc/
 ```
