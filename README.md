@@ -73,6 +73,7 @@ mvn archetype:generate -DgroupId=com.xunmao.demo -DartifactId=spring-mvc -Darche
 ### 部署到 Tomcat
 
 将 war 包拷贝至 Tomcat 的指定文件夹：
+
 ```
 {tomcat-installation-directory}/webapps
 ```
@@ -82,6 +83,65 @@ Tomcat 启动时，会将 war 自动展开为同名的文件夹（包含了 jsp 
 ### 访问应用
 
 访问以下 URL 就可以看到 spring-mvc 项目的首页了。
+
 ```
 localhost:8080/spring-mvc/
+```
+
+当然，也可以通过一些配置将上述 URL 中的 `spring-mvc` 部分省略。可以参考以下博客：  
+https://www.cnblogs.com/ysocean/p/6893446.html#_label2
+
+### 设置 Tomcat 管理员账号
+
+在以下配置文件中，可以添加管理员账号：
+
+```
+{tomcat-installation-directory}/conf/tomcat-users.xml
+```
+
+具体来说就是在 `tomcat-users` 中添加 `user` 标签。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or ...
+-->
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+<!--
+  By default, no user is included in the "manager-gui" role required ...
+-->
+    <user username="admin" password="admin" roles="manager-gui"/>
+</tomcat-users>
+```
+
+### 添加新的 JSP 和 Servlet
+
+新的 JSP 通过以下链接访问：
+
+```
+localhost:8080/spring-mvc/hello?user=xunmao
+```
+
+首先，编写 hello.jsp 文件，存放在 WEB-INF 文件夹下。  
+然后，将 JSP 加入 web.xml 文件，以便映射到相应的 Servlet 类。
+
+```xml
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.xunmao.demo.servlet.HelloServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+</web-app>
 ```
