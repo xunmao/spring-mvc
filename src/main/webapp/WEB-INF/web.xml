@@ -9,13 +9,30 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
+  <!-- 1. 注册 DispatcherServlet -->
   <servlet>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>com.xunmao.demo.servlet.HelloServlet</servlet-class>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 1.1. 关联一个 Spring MVC 的配置文件  -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <!-- 
+        通过 Class Path 关联配置文件时，文件名必须符合以下约定：
+        {filename}-servlet.xml
+       -->
+      <param-value>classpath:spring-mvc-servlet.xml</param-value>
+    </init-param>
+    <!-- TODO 1.2. 启动级别为1（代表？） -->
+    <load-on-startup>1</load-on-startup>
   </servlet>
 
+  <!-- 
+    “/” 匹配所有的请求（但是不包括 .jsp 文件）
+    “/*” 匹配所有的请求（但是包括 .jsp 文件）
+   -->
   <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <servlet-name>app</servlet-name>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
+
 </web-app>

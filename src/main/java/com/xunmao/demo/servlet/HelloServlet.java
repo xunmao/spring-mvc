@@ -18,11 +18,11 @@ public class HelloServlet extends HttpServlet {
 
         // 2. 业务逻辑
         // 2.1. 设置 title
-        Date currentTime = new Date(System.currentTimeMillis());
-        req.getSession().setAttribute("user", user);
+        req.setAttribute("user", user);
         // 2.2. 设置 h1
+        Date currentTime = new Date(System.currentTimeMillis());
         String message = String.format("Hi, %s! Current Time is %s", user, currentTime);
-        req.getSession().setAttribute("message", message);
+        req.setAttribute("message", message);
 
         // 3. 视图跳转
         req.getRequestDispatcher("/WEB-INF/hello.jsp").forward(req, resp);

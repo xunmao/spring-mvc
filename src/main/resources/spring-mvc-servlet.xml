@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+  <!-- 1. 添加映射处理器 -->
+  <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+  <!-- 2. 添加处理器适配器 -->
+  <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+  <!-- 3. 添加视图解析器 -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/" />
+    <property name="suffix" value=".jsp" />
+  </bean>
+
+  <!-- 4. Controller -->
+  <bean id="/hello" class="com.xunmao.demo.controller.HelloController"></bean>
+</beans>
