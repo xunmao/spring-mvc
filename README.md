@@ -127,21 +127,68 @@ localhost:8080/spring-mvc/hello?user=xunmao
 
 首先，编写 hello.jsp 文件，存放在 WEB-INF 文件夹下。  
 然后，将 JSP 加入 web.xml 文件，以便映射到相应的 Servlet 类。
+（特别注意， web.xml 文件的格式要求严格，最好参考 ROOT 文件夹下的 web.xml 文件。
 
 ```xml
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://xmlns.jcp.org/xml/ns/javaee
+    http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0">
 
-<web-app>
+  <!-- 
+    注意，如果遇到 ${...} 不能被解析，需要检查标签的写法，具体参考：
+    https://stackoverflow.com/questions/30080810/el-expressions-not-evaluated-in-jsp
+   -->
+
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>HelloServlet</servlet-name>
+    <servlet-name>hello</servlet-name>
     <servlet-class>com.xunmao.demo.servlet.HelloServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
+    <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
+</web-app>
+```
+
+## 使用 Spring MVC
+
+### 更改配置文件
+
+```xml
+<web-app>
+
+    <!-- 1. 注册 DispatcherServlet -->
+    <servlet>
+        <servlet-name>app</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 1.1. 关联一个 Spring MVC 的配置文件  -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- 
+              通过 Class Path 关联配置文件时，文件名必须符合以下约定：
+              {filename}-servlet.xml
+             -->
+            <param-value>classpath:spring-mvc-servlet.xml</param-value>
+        </init-param>
+        <!-- TODO 1.2. 启动级别为1（代表？） -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- 
+      “/” 匹配所有的请求（但是不包括 .jsp 文件）
+      “/*” 匹配所有的请求（但是包括 .jsp 文件）
+     -->
+    <servlet-mapping>
+        <servlet-name>app</servlet-name>
+        <url-pattern>/app/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
 ```
