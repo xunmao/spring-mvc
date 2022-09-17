@@ -117,7 +117,6 @@ Tomcat 启动时，会将 war 自动展开为同名的文件夹（包含了 jsp 
 ### 访问应用
 
 访问以下 URL 就可以看到 spring-mvc 项目的首页了。
-
 ```
 localhost:8080/spring-mvc/
 ```
@@ -128,13 +127,11 @@ https://www.cnblogs.com/ysocean/p/6893446.html#_label2
 ### （参考）设置 Tomcat 管理员账号
 
 在以下配置文件中，可以添加管理员账号：
-
 ```
 {tomcat-installation-directory}/conf/tomcat-users.xml
 ```
 
 具体来说就是在 `tomcat-users` 中添加 `user` 标签。
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
@@ -153,32 +150,68 @@ https://www.cnblogs.com/ysocean/p/6893446.html#_label2
 
 ## 使用 Spring MVC
 
-### 更改配置文件
+### 初始 Spring MVC
 
+更改配置文件
 ```xml
 <web-app>
+  <!-- 1. 注册 DispatcherServlet -->
+  <servlet>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 1.1. 关联一个 Spring MVC 的配置文件  -->
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:app-xml-servlet.xml</param-value>
+    </init-param>
+    <!-- 1.2. 启动顺序，数字越小，启动越早 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
 
-    <!-- 1. 注册 DispatcherServlet -->
-    <servlet>
-        <servlet-name>app</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!-- 1.1. 关联一个 Spring MVC 的配置文件  -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc-servlet.xml</param-value>
-        </init-param>
-        <!-- TODO 1.2. 启动级别为1（代表？） -->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <!-- 
-      “/” 匹配所有的请求（但是不包括 .jsp 文件）
-      “/*” 匹配所有的请求（但是包括 .jsp 文件）
-     -->
-    <servlet-mapping>
-        <servlet-name>app</servlet-name>
-        <url-pattern>/app/*</url-pattern>
-    </servlet-mapping>
-
+  <!-- 
+    “/” 匹配所有的请求（但是不包括 .jsp 文件）
+    “/*” 匹配所有的请求（但是包括 .jsp 文件）
+   -->
+  <servlet-mapping>
+    <servlet-name>app</servlet-name>
+    <url-pattern>/app/*</url-pattern>
+  </servlet-mapping>
 </web-app>
 ```
+
+### 使用注解开发
+
+更改配置文件
+```xml
+<web-app>
+  <!-- 1. 注册 DispatcherServlet -->
+  <servlet>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 1.1. 关联一个 Spring MVC 的配置文件  -->
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:app-anno-servlet.xml</param-value>
+    </init-param>
+    <!-- 1.2. 启动顺序，数字越小，启动越早 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- 
+    “/” 匹配所有的请求（但是不包括 .jsp 文件）
+    “/*” 匹配所有的请求（但是包括 .jsp 文件）
+   -->
+  <servlet-mapping>
+    <servlet-name>app</servlet-name>
+    <url-pattern>/app/*</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
+获取参数的方法
+> Note that use of @RequestParam is optional (for example, to set its
+> attributes). By default, any argument that is a simple value type (as
+> determined by BeanUtils#isSimpleProperty) and is not resolved by any other
+> argument resolver, is treated as if it were annotated with @RequestParam.
+
+https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-requestheader
