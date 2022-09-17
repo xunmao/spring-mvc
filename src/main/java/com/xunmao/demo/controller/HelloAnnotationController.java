@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HelloAnnotationHandler {
+public class HelloAnnotationController {
 
     @RequestMapping("/hello")
     public String hello(String user, Model model) {
