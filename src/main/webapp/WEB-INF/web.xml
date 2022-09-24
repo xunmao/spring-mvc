@@ -7,8 +7,6 @@
     https://stackoverflow.com/questions/30080810/el-expressions-not-evaluated-in-jsp
    -->
 
-  <display-name>Archetype Created Web Application</display-name>
-
   <!-- 1. 注册 DispatcherServlet -->
   <servlet>
     <servlet-name>app</servlet-name>
@@ -17,10 +15,11 @@
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <!-- 
-        1) app-xml-servlet.xml: 使用 XML 配置
-        2) app-anno-servlet.xml: 使用注解配置
+        1) web/xml-based-servlet.xml: 使用 XML 配置
+        2) web/annotated-servlet.xml: 使用注解配置
+        3) app-context.xml: 使用 Spring 整合 SSM
        -->
-      <param-value>classpath:app-anno-servlet.xml</param-value>
+      <param-value>classpath:app-context.xml</param-value>
     </init-param>
     <!-- 1.2. 启动顺序，数字越小，启动越早 -->
     <load-on-startup>1</load-on-startup>

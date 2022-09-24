@@ -15,5 +15,5 @@
   </bean>
 
   <!-- 4. 添加 Controller -->
-  <bean id="/hello" class="com.xunmao.demo.controller.HelloInterfaceController"></bean>
+  <bean id="/hello" class="com.xunmao.demo.controller.HelloInterfaceController" />
 </beans>
