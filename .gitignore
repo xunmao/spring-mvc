@@ -104,3 +104,6 @@ buildNumber.properties
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,maven,java,macos
+
+# Ignore Bootstrap
+src/main/webapp/bootstrap-5.2.1-dist
