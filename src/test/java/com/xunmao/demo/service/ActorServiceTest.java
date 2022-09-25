@@ -18,4 +18,14 @@ public class ActorServiceTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void shouldListActors() {
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
+            ActorService actorService = context.getBean("actorService", ActorServiceImpl.class);
+            actorService.listActors().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

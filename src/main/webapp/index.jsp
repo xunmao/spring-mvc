@@ -35,7 +35,10 @@
     <div>
       <!-- https://getbootstrap.com/docs/5.2/components/buttons/ -->
       <a href="${pageContext.request.contextPath}/hello?user=xunmao" class="btn btn-primary btn-lg px-4 gap-3">欢迎页面</a>
-      <a href="${pageContext.request.contextPath}/v1/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员</a>
+      <a href="${pageContext.request.contextPath}/v1/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表 (v1)</a>
+      <a href="${pageContext.request.contextPath}/v1/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员 (v1)</a>
+      <a href="${pageContext.request.contextPath}/v2/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表 (v2)</a>
+      <a href="${pageContext.request.contextPath}/v2/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员 (v2)</a>
     </div>
   </div>
 </body>

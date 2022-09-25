@@ -1,14 +1,21 @@
 package com.xunmao.demo.dao.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xunmao.demo.dao.ActorDao;
 import com.xunmao.demo.pojo.Actor;
+import com.xunmao.demo.util.DataSource;
 
 public class ActorDaoImpl implements ActorDao {
+
+    @Autowired
+    DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public void addActor(Actor actor) {
@@ -24,22 +31,18 @@ public class ActorDaoImpl implements ActorDao {
 
     @Override
     public Actor findActorById(int actorId) {
-        // 关于 Java 日期时间的用法可以参考：
-        // https://www.runoob.com/java/java-date-time.html
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date lastUpdate = simpleDateFormat.parse("2006-02-15 04:34:33");
-            return new Actor(1, "PENELOPE", "GUINESS", lastUpdate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        List<Actor> actors = dataSource.loadAllActors();
+        for (Actor actor : actors) {
+            if (actor.getActorId() == actorId) {
+                return actor;
+            }
         }
         return null;
     }
 
     @Override
     public List<Actor> listActor() {
-        // TODO Auto-generated method stub
-        return null;
+        return dataSource.loadAllActors();
     }
 
     @Override

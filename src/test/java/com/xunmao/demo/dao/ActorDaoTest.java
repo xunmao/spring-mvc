@@ -18,4 +18,14 @@ public class ActorDaoTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void shouldListActor() {
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
+            ActorDao actorDao = context.getBean("actorDao", ActorDaoImpl.class);
+            actorDao.listActor().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

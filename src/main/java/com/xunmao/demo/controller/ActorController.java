@@ -1,5 +1,7 @@
 package com.xunmao.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +17,21 @@ public class ActorController {
     @Autowired
     ActorService actorService;
 
+    @GetMapping("/v1/actors")
+    public String listActor(Model model) {
+        List<Actor> actors = actorService.listActors();
+        model.addAttribute("result", actors);
+        return "actor";
+    }
+
     @GetMapping("/v1/actor/{id}")
     public String findActorById(@PathVariable Integer id, Model model) {
-
-        model.addAttribute("parameter", "Path parameter is " + id);
-        if (id == 1) {
-            Actor actor = actorService.findActorById(id);
+        Actor actor = actorService.findActorById(id);
+        if (actor != null) {
             model.addAttribute("result", actor);
         } else {
-            model.addAttribute("result", "Not Found.");
+            model.addAttribute("result", "Not Found");
         }
-
         return "actor";
     }
 }

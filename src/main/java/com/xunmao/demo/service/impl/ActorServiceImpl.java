@@ -1,5 +1,7 @@
 package com.xunmao.demo.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xunmao.demo.dao.ActorDao;
@@ -16,8 +18,12 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public Actor findActorById(int actorId) {
+    public List<Actor> listActors() {
+        return actorDao.listActor();
+    }
 
+    @Override
+    public Actor findActorById(int actorId) {
         return actorDao.findActorById(actorId);
     }
 }
