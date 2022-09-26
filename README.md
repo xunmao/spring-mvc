@@ -345,6 +345,12 @@ Spring MVC 的配置文件如下（ resources/web/xml-based-servlet.xml ）：
 
 TODO
 
+## 前端开发
+
+编写前端页面的步骤：
+1. 使用 HTML + CSS (Bootstrap) 编写静态页面，需要动态展示的部分可以先用模拟数据代替
+1. 将静态的 HTML 页面改为 JSP 页面，动态展示部分通过 Java 代码实现
+
 ## 其他
 
 获取参数的方法

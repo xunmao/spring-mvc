@@ -20,7 +20,7 @@ public class ActorController {
     @GetMapping("/v1/actors")
     public String listActor(Model model) {
         List<Actor> actors = actorService.listActors();
-        model.addAttribute("result", actors);
+        model.addAttribute("actors", actors);
         return "actor";
     }
 

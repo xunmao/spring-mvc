@@ -48,6 +48,13 @@
       <version>2.3.3</version>
       <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+    <!-- TODO: 暂时使用旧版的 JSTL 依赖包，使用新版依赖包时报错 -->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
     <!-- JSON -->
     <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
     <dependency>
