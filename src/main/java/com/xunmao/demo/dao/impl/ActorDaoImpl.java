@@ -19,19 +19,23 @@ public class ActorDaoImpl implements ActorDao {
 
     @Override
     public void addActor(Actor actor) {
-        // TODO Auto-generated method stub
-
+        dataSource.getActors().add(actor);
     }
 
     @Override
     public void deleteActor(int actorId) {
-        // TODO Auto-generated method stub
-
+        List<Actor> actors = dataSource.getActors();
+        for (Actor actor : actors) {
+            if (actor.getActorId() == actorId) {
+                dataSource.getActors().remove(actor);
+                return;
+            }
+        }
     }
 
     @Override
     public Actor findActorById(int actorId) {
-        List<Actor> actors = dataSource.loadAllActors();
+        List<Actor> actors = dataSource.getActors();
         for (Actor actor : actors) {
             if (actor.getActorId() == actorId) {
                 return actor;
@@ -42,12 +46,19 @@ public class ActorDaoImpl implements ActorDao {
 
     @Override
     public List<Actor> listActor() {
-        return dataSource.loadAllActors();
+        return dataSource.getActors();
     }
 
     @Override
-    public void updateActor(Actor actor) {
-        // TODO Auto-generated method stub
-
+    public void updateActor(Actor newActor) {
+        List<Actor> actors = dataSource.getActors();
+        for (Actor actor : actors) {
+            if (actor.getActorId() == newActor.getActorId()) {
+                actor.setFirstName(newActor.getFirstName());
+                actor.setLastName(newActor.getLastName());
+                actor.setLastUpdate(newActor.getLastUpdate());
+                return;
+            }
+        }
     }
 }

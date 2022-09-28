@@ -7,6 +7,6 @@ public class DataSourceTest {
     @Test
     public void shouldGetAllActors() {
         DataSource dataSource = new DataSource();
-        dataSource.loadAllActors().forEach(System.out::println);
+        dataSource.getActors().forEach(System.out::println);
     }
 }
