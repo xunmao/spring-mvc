@@ -45,7 +45,7 @@ public class ActorDaoImpl implements ActorDao {
     }
 
     @Override
-    public List<Actor> listActor() {
+    public List<Actor> listActors() {
         return dataSource.getActors();
     }
 
@@ -60,5 +60,10 @@ public class ActorDaoImpl implements ActorDao {
                 return;
             }
         }
+    }
+
+    @Override
+    public void resetActors() {
+        dataSource.resetActors();
     }
 }

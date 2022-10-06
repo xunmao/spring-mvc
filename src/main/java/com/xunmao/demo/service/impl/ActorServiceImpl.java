@@ -19,11 +19,31 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public List<Actor> listActors() {
-        return actorDao.listActor();
+        return actorDao.listActors();
     }
 
     @Override
     public Actor findActorById(int actorId) {
         return actorDao.findActorById(actorId);
     }
+
+    @Override
+    public void addActor(Actor actor) {
+        actorDao.addActor(actor);
+    }
+
+    @Override
+    public void deleteActor(int actorId) {
+        actorDao.deleteActor(actorId);
+    }
+
+    @Override
+    public void updateActor(Actor actor) {
+        actorDao.updateActor(actor);
+    }
+
+    @Override
+    public void resetActors() {
+        actorDao.resetActors();
+    };
 }

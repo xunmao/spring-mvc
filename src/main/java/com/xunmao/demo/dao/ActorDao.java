@@ -6,7 +6,9 @@ import com.xunmao.demo.pojo.Actor;
 
 public interface ActorDao {
 
-    public List<Actor> listActor();
+    public List<Actor> listActors();
+
+    public void resetActors();
 
     public Actor findActorById(int actorId);
 

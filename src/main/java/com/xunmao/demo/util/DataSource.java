@@ -13,6 +13,21 @@ public class DataSource {
     private ArrayList<Actor> actors = new ArrayList<>();
 
     public DataSource() {
+        loadActors();
+    }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void resetActors() {
+        loadActors();
+    }
+
+    private void loadActors() {
+        // 清空已有的数据
+        actors.clear();
+
         // 关于 Java 日期时间的用法可以参考：
         // https://www.runoob.com/java/java-date-time.html
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,9 +56,5 @@ public class DataSource {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Actor> getActors() {
-        return actors;
     }
 }

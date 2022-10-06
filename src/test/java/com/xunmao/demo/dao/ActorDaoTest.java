@@ -22,10 +22,10 @@ public class ActorDaoTest {
     }
 
     @Test
-    public void shouldListActor() {
+    public void shouldListActors() {
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
             ActorDao actorDao = context.getBean("actorDao", ActorDaoImpl.class);
-            actorDao.listActor().forEach(System.out::println);
+            actorDao.listActors().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class ActorDaoTest {
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
             ActorDao actorDao = context.getBean("actorDao", ActorDaoImpl.class);
             actorDao.addActor(new Actor(11, "firstName", "lastName", new Date()));
-            actorDao.listActor().forEach(System.out::println);
+            actorDao.listActors().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class ActorDaoTest {
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
             ActorDao actorDao = context.getBean("actorDao", ActorDaoImpl.class);
             actorDao.updateActor(new Actor(10, "firstName", "lastName", new Date()));
-            actorDao.listActor().forEach(System.out::println);
+            actorDao.listActors().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +58,25 @@ public class ActorDaoTest {
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
             ActorDao actorDao = context.getBean("actorDao", ActorDaoImpl.class);
             actorDao.deleteActor(10);
-            actorDao.listActor().forEach(System.out::println);
+            actorDao.listActors().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void shouldResetActors() {
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml")) {
+            ActorDao actorDao = context.getBean("actorDao", ActorDao.class);
+            for (int i = 1; i < 4; i++) {
+                actorDao.deleteActor(i);
+            }
+            System.out.println("删除部分数据: 当前数据量(条): " + actorDao.listActors().size());
+
+            actorDao.resetActors();
+            System.out.println("重置数据: 当前数据量(条): " + actorDao.listActors().size());
+
+            actorDao.listActors().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
