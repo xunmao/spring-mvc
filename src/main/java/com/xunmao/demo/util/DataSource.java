@@ -4,20 +4,29 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xunmao.demo.pojo.Actor;
+import com.xunmao.demo.pojo.User;
 
 public class DataSource {
 
     private ArrayList<Actor> actors = new ArrayList<>();
+    private Map<Integer, User> users = new HashMap<>();
 
     public DataSource() {
+        loadUsers();
         loadActors();
     }
 
     public List<Actor> getActors() {
         return actors;
+    }
+
+    public Map<Integer, User> getUsers() {
+        return users;
     }
 
     public void resetActors() {
@@ -53,6 +62,18 @@ public class DataSource {
             actors.add(actor08);
             actors.add(actor09);
             actors.add(actor10);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadUsers() {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date lastUpdate = simpleDateFormat.parse("2022-10-01 04:34:33");
+            User user = new User(1, "xunmao", "19890706", lastUpdate);
+            users.put(user.getUserId(), user);
         } catch (ParseException e) {
             e.printStackTrace();
         }

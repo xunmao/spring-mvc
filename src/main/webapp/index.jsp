@@ -14,6 +14,8 @@
    -->
   <!-- 导入本地保存的 Bootstrap 依赖 -->
   <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.min.css">
+  <!-- 导入自定义 CSS -->
+  <link rel="stylesheet" href="css/signin.css">
 </head>
 
 <body>
@@ -35,13 +37,29 @@
       </p>
       <div>
         <!-- https://getbootstrap.com/docs/5.2/components/buttons/ -->
-        <a href="${pageContext.request.contextPath}/hello?user=xunmao" class="btn btn-primary btn-lg px-4 gap-3">欢迎页面</a>
-        <a href="${pageContext.request.contextPath}/v1/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表 (v1)</a>
+        <a href="${pageContext.request.contextPath}/v1/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表
+          (v1)</a>
         <!-- <a href="${pageContext.request.contextPath}/v1/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员 (v1)</a> -->
-        <a href="${pageContext.request.contextPath}/v2/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表 (v2)</a>
-        <a href="${pageContext.request.contextPath}/v2/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员 (v2)</a>
+        <a href="${pageContext.request.contextPath}/v2/actors" class="btn btn-outline-secondary btn-lg px-4">演员列表
+          (v2)</a>
+        <a href="${pageContext.request.contextPath}/v2/actor/1" class="btn btn-outline-secondary btn-lg px-4">1号演员
+          (v2)</a>
       </div>
     </div>
+  </div>
+
+  <div class="form-signin">
+    <form action="${pageContext.request.contextPath}/hello" method="get">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username" />
+        <label for="floatingUsername">Username</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg w-100">Sign in</button>
+    </form>
   </div>
 </body>
 

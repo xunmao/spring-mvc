@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloAnnotationController {
 
     @RequestMapping("/hello")
-    public String hello(String user, Model model) {
+    public String hello(String username, Model model) {
 
         // 2. 根据业务逻辑，将数据放入 ModelAndView 的实例中
 
@@ -22,11 +22,11 @@ public class HelloAnnotationController {
         // argument resolver, is treated as if it were annotated with @RequestParam.
 
         // 2.2. 设置 title
-        model.addAttribute("user", user);
+        model.addAttribute("username", username);
 
         // 2.2. 设置 h1
         Date currentTime = new Date(System.currentTimeMillis());
-        String message = String.format("Hi, %s! Current Time is %s", user, currentTime);
+        String message = String.format("Hi, %s! Current Time is %s", username, currentTime);
         model.addAttribute("message", message);
 
         // 3. 视图跳转
