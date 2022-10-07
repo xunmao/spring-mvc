@@ -1,4 +1,4 @@
-package com.xunmao.demo.controller;
+package com.xunmao.demo.controller.v2;
 
 import java.util.List;
 

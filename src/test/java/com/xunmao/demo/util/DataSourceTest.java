@@ -1,8 +1,11 @@
 package com.xunmao.demo.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+
+import com.xunmao.demo.pojo.User;
 
 public class DataSourceTest {
 
@@ -49,7 +52,10 @@ public class DataSourceTest {
         DataSource dataSource = new DataSource();
         System.out.println("加载数据: 当前用户量(条): " + dataSource.getUsers().size());
 
-        assertEquals("xunmao", dataSource.getUsers().get(1).getUsername());
-        assertEquals("19890706", dataSource.getUsers().get(1).getPassword());
+        String expected = "xunmao";
+        User actualUser = dataSource.getUsers().get(expected);
+        assertNotNull(actualUser);
+        assertEquals("19890706", actualUser.getPassword());
+        System.out.println(actualUser);
     }
 }

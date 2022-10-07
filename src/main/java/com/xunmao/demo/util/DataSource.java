@@ -14,7 +14,7 @@ import com.xunmao.demo.pojo.User;
 public class DataSource {
 
     private ArrayList<Actor> actors = new ArrayList<>();
-    private Map<Integer, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
     public DataSource() {
         loadUsers();
@@ -25,7 +25,7 @@ public class DataSource {
         return actors;
     }
 
-    public Map<Integer, User> getUsers() {
+    public Map<String, User> getUsers() {
         return users;
     }
 
@@ -73,7 +73,7 @@ public class DataSource {
         try {
             Date lastUpdate = simpleDateFormat.parse("2022-10-01 04:34:33");
             User user = new User(1, "xunmao", "19890706", lastUpdate);
-            users.put(user.getUserId(), user);
+            users.put(user.getUsername(), user);
         } catch (ParseException e) {
             e.printStackTrace();
         }
