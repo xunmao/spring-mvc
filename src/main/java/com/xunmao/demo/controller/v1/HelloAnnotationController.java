@@ -21,13 +21,18 @@ public class HelloAnnotationController {
         // determined by BeanUtils#isSimpleProperty) and is not resolved by any other
         // argument resolver, is treated as if it were annotated with @RequestParam.
 
-        // 2.2. 设置 title
-        model.addAttribute("username", username);
+        if (username == null || username.equals("")) {
+            model.addAttribute("title", "Please sign in");
+            model.addAttribute("message", "Please sign in");
+        } else {
+            // 2.2. 设置 title
+            model.addAttribute("title", "Hello, " + username);
 
-        // 2.2. 设置 h1
-        Date currentTime = new Date(System.currentTimeMillis());
-        String message = String.format("Hi, %s! Current Time is %s", username, currentTime);
-        model.addAttribute("message", message);
+            // 2.2. 设置 h1
+            Date currentTime = new Date(System.currentTimeMillis());
+            String message = String.format("Hi, %s! Current Time is %s", username, currentTime);
+            model.addAttribute("message", message);
+        }
 
         // 3. 视图跳转
         return "hello";

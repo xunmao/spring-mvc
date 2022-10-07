@@ -49,7 +49,7 @@
   </div>
 
   <div class="form-signin">
-    <form action="${pageContext.request.contextPath}/hello" method="get">
+    <form action="${pageContext.request.contextPath}/v1/login" method="post">
       <div class="form-floating">
         <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username" />
         <label for="floatingUsername">Username</label>
